@@ -11,5 +11,6 @@ public class Car {
     double totalTravelledDistance;
     int doorCount;
     boolean damaged;
+    Engine engine;
     
 }
