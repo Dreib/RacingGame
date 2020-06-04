@@ -44,4 +44,8 @@ public class Vehicle {
         return distance;
     }
 
+    public void makeSound() {
+        System.out.println("Make way!!!");
+    }
+
 }
