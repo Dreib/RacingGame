@@ -25,11 +25,26 @@ public class App
         System.out.println(carReference.totalTravelledDistance);
         System.out.println(carReference.doorCount);
 
+        double currentDistance = carReference.accelerate(100, 1);
+
+        System.out.println(carReference.make);
+        System.out.println(carReference.model);
+        System.out.println(carReference.mileage);
+        System.out.println(carReference.fuelLevel);
+        System.out.println(carReference.color);
+        System.out.println(carReference.maxSpeed);
+
+        System.out.println(carReference.damaged);
+        System.out.println(carReference.totalTravelledDistance);
+        System.out.println(carReference.doorCount);
+
         Car car2 = new Car();
 
         car2.make = "BMW";
         car2.model = "CLS";
         car2.color = "Black";
+
+        double car2Distance = car2.accelerate(120, 3);
 
         System.out.println(car2.make + " " + carReference.make);
 
