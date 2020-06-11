@@ -7,6 +7,15 @@ public class App
         Game game = new Game();
         game.start();
 
+        //Engine engine = new Engine();
+        //engine.manufacturer = "BMW";
+
+        //AutoVehicle autoVehicle = new AutoVehicle(engine);
+
+        //Car car = new Car(engine);
+
+        //System.out.println(car.make = "Dacia");
+
 //        System.out.println( "Welcome to the racing game.");
 //
 //        Car carReference = new Car();
