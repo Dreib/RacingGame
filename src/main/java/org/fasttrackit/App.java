@@ -1,6 +1,8 @@
 package org.fasttrackit;
 
-public class App 
+import org.fasttrackit.cheater.CheatingVehicle;
+
+public class App
 {
     public static void main( String[] args )
     {
