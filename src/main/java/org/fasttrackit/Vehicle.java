@@ -12,7 +12,7 @@ public class Vehicle {
     private double mileage;
     private double fuelLevel;
     private double maxSpeed;
-    private double totalTravelledDistance;
+    protected double totalTravelledDistance;
     private boolean damaged;
 
     public Vehicle() {

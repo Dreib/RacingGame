@@ -7,6 +7,8 @@ public class CheatingVehicle extends Vehicle {
     //constant
     public static final String TYPE = "CHEATER";
 
-
+    public void cheat() {
+        totalTravelledDistance *= 2;
+    }
 
 }
