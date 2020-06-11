@@ -7,6 +7,17 @@ public class App
         Game game = new Game();
         game.start();
 
+//        String pool
+//        String a = "test";
+//        String literals
+//        String b = "test";
+//        String c = new String("test");
+//
+//        System.out.println("a == b: " + (a == b));
+//        System.out.println("a == c: " + (a == c));
+//        System.out.println("a equals c: " + a.equals(c));
+
+
         //Engine engine = new Engine();
         //engine.manufacturer = "BMW";
 
