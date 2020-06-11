@@ -7,4 +7,6 @@ public class CheatingVehicle extends Vehicle {
     //constant
     public static final String TYPE = "CHEATER";
 
+
+
 }
