@@ -18,6 +18,14 @@ public class CheatingVehicle extends Vehicle {
         return distance;
     }
 
+    //co-variant return type
+    //overriding method can be more permissive but not more constrictive
+    @Override
+    public CheatingVehicle reset() {
+        super.reset();
+        return this;
+    }
+
     public void cheat() {
         totalTravelledDistance *= 2;
     }
