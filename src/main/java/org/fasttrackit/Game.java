@@ -1,5 +1,7 @@
 package org.fasttrackit;
 
+import org.fasttrackit.cheater.CheatingVehicle;
+
 import java.util.Scanner;
 
 public class Game {
@@ -9,6 +11,7 @@ public class Game {
 
         int playerCount = getPlayerCountFromUser();
         System.out.println("Player count: " + playerCount);
+
     }
 
     private int getPlayerCountFromUser() {

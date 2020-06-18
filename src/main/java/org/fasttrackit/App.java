@@ -9,6 +9,23 @@ public class App
         Game game = new Game();
         game.start();
 
+        /*
+        //polymorphism
+        Vehicle vehicle = new CheatingVehicle();
+        vehicle.setMake("Cheating vehicle");
+
+        //object type determines method implementation
+        vehicle.accelerate(60,1);
+
+        System.out.println("Accelerate with one param");
+        vehicle.accelerate(60);
+
+        //variable type determines what methods are invoked
+        //type casting
+        if(vehicle instanceof CheatingVehicle) {
+            ((CheatingVehicle)vehicle).cheat();
+        }*/
+
 //        Vehicle vehicle1 = new Vehicle();
 //        vehicle1.totalVehicleCount = 1;
 
