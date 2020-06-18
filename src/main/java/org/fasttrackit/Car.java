@@ -9,6 +9,11 @@ public class Car extends AutoVehicle {
         super(engine);
     }
 
+    //constructor overloading
+    public Car() {
+        this(new Engine());
+    }
+
     public int getDoorCount() {
         return doorCount;
     }
