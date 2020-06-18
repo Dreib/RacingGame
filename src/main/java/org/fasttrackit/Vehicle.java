@@ -138,4 +138,18 @@ public class Vehicle {
     public static int getTotalVehicleCount() {
         return totalVehicleCount;
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", mileage=" + mileage +
+                ", fuelLevel=" + fuelLevel +
+                ", maxSpeed=" + maxSpeed +
+                ", totalTravelledDistance=" + totalTravelledDistance +
+                ", damaged=" + damaged +
+                '}';
+    }
 }
