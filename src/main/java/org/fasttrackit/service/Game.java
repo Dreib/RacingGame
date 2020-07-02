@@ -1,19 +1,23 @@
 package org.fasttrackit.service;
 
 import org.fasttrackit.controller.StandardInputController;
+import org.fasttrackit.domain.Mobile;
 import org.fasttrackit.domain.Track;
+import org.fasttrackit.domain.vehicle.Car;
 import org.fasttrackit.domain.vehicle.Vehicle;
 import org.fasttrackit.exception.InvalidOptionSelectedException;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 
     private Track[] tracks = new Track[3];
-    private List<Vehicle> competitors = new ArrayList<>();
+    private Track selectedTrack;
+    private List<Mobile> competitors = new ArrayList<>();
+    private Set<Mobile> outOfRaceCompetitors = new HashSet<>();
+
+    private boolean winnerNotKnown = true;
 
     private StandardInputController controller = new StandardInputController();
 
@@ -22,12 +26,16 @@ public class Game {
 
         initializeTracks();
 
-        Track selectedTrack = getSelectedTrack();
+        selectedTrack = getSelectedTrack();
         System.out.println("You have selected: " + selectedTrack.getName());
 
         initializeCompetitors();
 
         System.out.println(competitors);
+
+        while(winnerNotKnown && outOfRaceCompetitors.size() < competitors.size()) {
+            playOneRound();
+        }
     }
 
     private void initializeCompetitors() {
@@ -36,13 +44,36 @@ public class Game {
         for(int i = 1; i <= playerCount; i++) {
             System.out.println("Preparing player " + i + " for the race.");
 
-            Vehicle vehicle = new Vehicle();
+            Vehicle vehicle = new Car();
             vehicle.setMake(controller.getVehicleMakeFromUser());
             vehicle.setFuelLevel(30);
             vehicle.setMaxSpeed(300);
             vehicle.setMileage(ThreadLocalRandom.current().nextDouble(9, 15));
 
             competitors.add(vehicle);
+        }
+    }
+
+    private void playOneRound() {
+        System.out.println("New round");
+
+        // enhanced for (for-each)
+        for (Mobile competitor : competitors) {
+            if(!competitor.canMove()) {
+                outOfRaceCompetitors.add(competitor);
+                continue;
+            }
+
+            double speed = controller.getAccelerationSpeedFromUser();
+
+            competitor.accelerate(speed, 1);
+
+            if(competitor.getTotalTraveledDistance() >= selectedTrack.getLength()) {
+                System.out.println("Congrats! The winner is: " + competitor.getName());
+                winnerNotKnown = false;
+
+                break;
+            }
         }
     }
 

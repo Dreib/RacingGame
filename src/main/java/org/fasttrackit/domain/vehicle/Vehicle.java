@@ -1,73 +1,89 @@
 package org.fasttrackit.domain.vehicle;
 
-public class Vehicle {
+import org.fasttrackit.domain.Mobile;
 
-    //class / static variable
+import java.util.Objects;
+
+public abstract class Vehicle implements Mobile {
+
+    // class variable / static variable
     private static int totalVehicleCount;
 
-    //instance variables
+    // instance variables
     private String make;
     private String model;
     private String color;
     private double mileage;
     private double fuelLevel;
     private double maxSpeed;
-    protected double totalTravelledDistance;
+    protected double totalTraveledDistance;
     private boolean damaged;
+
+    private String password;
 
     public Vehicle() {
         totalVehicleCount++;
     }
 
-    //method overloading
+    // method overloading
     public double accelerate(double speed) {
         return accelerate(speed, 1);
     }
 
     public double accelerate(double speed, double durationInHours) {
-        if(speed > maxSpeed) {
-            System.out.println("MaxSpeed exceeded.");
+        if (speed > maxSpeed) {
+            System.out.println("Max speed exceeded.");
             return 0;
-        }
-        else if(speed == maxSpeed) {
-            System.out.println("Careful MaxSpeed reached.");
-        }
-        else {
+        } else if (speed == maxSpeed) {
+            System.out.println("Careful! Max speed reached!");
+        } else {
             System.out.println("Valid speed entered.");
         }
 
-        if(damaged) {
-            System.out.println("The vehicle is damaged. You cannot accelerate.");
+        if (!canMove()) {
+            System.out.println("You cannot accelerate.");
             return 0;
         }
 
+        System.out.println(make + " is accelerating with " + speed + " km/h for " + durationInHours + "h");
 
-        System.out.println(make + " is accelerating with " + speed + " km/h for " + durationInHours + "h.");
-
+        // local variable
         double distance = speed * durationInHours;
-        totalTravelledDistance += distance;
+        totalTraveledDistance = totalTraveledDistance + distance;
 
-        System.out.println("Total travelled distance: " + totalTravelledDistance + ".");
+        // same result as the statement above
+//        totalTraveledDistance += distance;
 
+        System.out.println("Total traveled distance: " + totalTraveledDistance);
+
+        // use more fuel if speed > 120 km/h
         double mileageMultiplier = 1;
-
-        //use more fuel if speed > 120 km/h
-        if(speed > 120) {
+        if (speed > 120) {
             mileageMultiplier = speed / 100;
         }
 
         double usedFuel = distance * mileage / 100;
         usedFuel *= mileageMultiplier;
 
-        fuelLevel -= usedFuel;
+        fuelLevel = fuelLevel - usedFuel;
 
-        System.out.println("Remaining fuel: " + fuelLevel + ".");
+        System.out.println("Remaining fuel: " + fuelLevel);
 
         return distance;
     }
 
+    @Override
+    public String getName() {
+        return make;
+    }
+
+    @Override
+    public boolean canMove() {
+        return fuelLevel > 0 && !damaged;
+    }
+
     protected Vehicle reset() {
-        totalTravelledDistance = 0;
+        totalTraveledDistance = 0;
         fuelLevel = 0;
         damaged = false;
 
@@ -126,12 +142,12 @@ public class Vehicle {
         this.maxSpeed = maxSpeed;
     }
 
-    public double getTotalTravelledDistance() {
-        return totalTravelledDistance;
+    public double getTotalTraveledDistance() {
+        return totalTraveledDistance;
     }
 
-    public void setTotalTravelledDistance(double totalTravelledDistance) {
-        this.totalTravelledDistance = totalTravelledDistance;
+    public void setTotalTraveledDistance(double totalTraveledDistance) {
+        this.totalTraveledDistance = totalTraveledDistance;
     }
 
     public boolean isDamaged() {
@@ -142,7 +158,7 @@ public class Vehicle {
         this.damaged = damaged;
     }
 
-    //read-only variable
+    // read-only variable
     public static int getTotalVehicleCount() {
         return totalVehicleCount;
     }
@@ -156,8 +172,28 @@ public class Vehicle {
                 ", mileage=" + mileage +
                 ", fuelLevel=" + fuelLevel +
                 ", maxSpeed=" + maxSpeed +
-                ", totalTravelledDistance=" + totalTravelledDistance +
+                ", totalTraveledDistance=" + totalTraveledDistance +
                 ", damaged=" + damaged +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return Double.compare(vehicle.mileage, mileage) == 0 &&
+                Double.compare(vehicle.fuelLevel, fuelLevel) == 0 &&
+                Double.compare(vehicle.maxSpeed, maxSpeed) == 0 &&
+                Double.compare(vehicle.totalTraveledDistance, totalTraveledDistance) == 0 &&
+                damaged == vehicle.damaged &&
+                Objects.equals(make, vehicle.make) &&
+                Objects.equals(model, vehicle.model) &&
+                Objects.equals(color, vehicle.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(make, model, color, mileage, fuelLevel, maxSpeed, totalTraveledDistance, damaged);
     }
 }
