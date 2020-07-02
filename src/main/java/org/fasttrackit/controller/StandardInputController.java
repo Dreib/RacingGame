@@ -1,28 +1,26 @@
 package org.fasttrackit.controller;
 
-import java.util.Scanner;
+import org.fasttrackit.controller.utils.ScannerUtils;
 
 public class StandardInputController {
 
     public int getPlayerCountFromUser() {
-        System.out.println("Please enter number of players: ");
-
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        System.out.println("Please enter number of players:");
+        return ScannerUtils.readNextSingleInt();
     }
 
     public int getTrackNumberFromUser() {
-        System.out.println("Please select a track: ");
-
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        System.out.println("Please select a track:");
+        return ScannerUtils.readNextSingleInt();
     }
 
     public String getVehicleMakeFromUser() {
-        System.out.println("Please enter vehicle make: ");
-
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        System.out.println("Please enter vehicle make:");
+        return ScannerUtils.SCANNER.nextLine();
     }
 
+    public double getAccelerationSpeedFromUser() {
+        System.out.println("Please enter acceleration speed:");
+        return ScannerUtils.readNextSingleDouble();
+    }
 }
