@@ -13,6 +13,15 @@ public class StandardInputController {
 
     public int getTrackNumberFromUser() {
         System.out.println("Please select a track:");
+        try {
+            return ScannerUtils.readNextSingleInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong value. Try again!");
+            return getCompetitorTypeFromUser();
+        }
+    }
+
+    public int getCompetitorTypeFromUser() {
         return ScannerUtils.readNextSingleInt();
     }
 

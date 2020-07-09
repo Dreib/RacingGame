@@ -39,6 +39,5 @@ public class FileRankingRepository implements RankingRepository {
         } catch (IOException e) {
             throw new RuntimeException("Failed so save rankings file.");
         }
-
     }
 }
